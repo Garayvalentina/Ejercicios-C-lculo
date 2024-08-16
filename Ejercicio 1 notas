@@ -1,0 +1,41 @@
+students = [
+    {"nombre": "José", "notas": [85, 90, 78, -10]},
+    {"nombre": "Carlos", "notas": [88, 72, 94, 102]},
+    {"nombre": "María", "notas": [95, 85, 87, "A++"]},
+    {"nombre": "Pablo", "notas": []},
+    {"nombre": "Electra", "notas": [-1, 200, -87, 150]},
+    {"nombre": "Manuelita", "notas": [70, "250", "30", 150]}
+]
+
+for student in students:
+    nombre = student["nombre"]
+    print(nombre)
+    notas = student["notas"]
+    notas_validas = []
+
+    for nota in notas:
+
+        if (type(nota) == int or type(nota) == float) and (0 <= nota <= 100):
+            notas_validas.append(nota)
+
+        elif (type(nota) == int or type(nota) == float) and (nota < 0 or nota > 100):
+            print(f"Nota inválida(fuera de rango): {nota}")
+
+        elif (type(nota) == str):
+            try:
+                nota_numerica = int(nota)
+                if (0 <= nota_numerica <= 100):
+                    notas_validas.append(nota_numerica)
+                else:
+                    print(f"Nota inválida(fuera de rango): {nota}")
+            except ValueError:
+                print(f"Nota inválida (caracter no contabilizable): {nota}")
+
+    student["notas"] = notas_validas
+
+    if notas_validas:
+        sumatoria = sum(notas_validas)
+        promedio = sumatoria / len(notas_validas)
+        print(f"Calificación final {promedio}.")
+    else:
+        print(f"No hay calificaciones válidas para {nombre} .")
